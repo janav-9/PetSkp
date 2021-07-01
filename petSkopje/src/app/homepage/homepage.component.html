@@ -1,0 +1,41 @@
+<mat-grid-list cols="{{cols}}" rowHeight="500px" (window:resize)="onResize($event)" [gutterSize]="'20px'">
+    <mat-grid-tile colspan="{{cols}}" style=" background: #faf7f2; " >
+        <div style="text-align: center" >
+            <h1>PetSkopje</h1>
+            <p>Сѐ што ви треба за вашиот миленик!</p>
+            <img src='../../assets/img/home.jpg'>
+          
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1" >
+        <div style="text-align: center">
+            <img src='../../assets/img/vet.jpg' height="50%" width="50%">
+            <h4>Најголемиот регистар на ветеринари и амбуланти за врвна нега на вашиот миленик</h4>
+            <a mat-raised-button color="primary" href="vets">Види повеќе</a>
+
+        </div>
+    </mat-grid-tile>
+
+    <mat-grid-tile colspan="1">
+        <div style="text-align: center">
+            <img src='../../assets/img/petsh.jpg' height="50%" width="50%">
+            <h4 height="30%" width="30%">Најдобрите производи во пет шоповите низ градот, достапни со само еден клик!</h4>
+            <a mat-raised-button color="primary" href="shops">Види повеќе</a>
+        </div>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile colspan="{{cols}}"  style=" background: #faf7f2; ">
+        <div style="text-align: center;width:50%; font-size: larger">
+            <img src='../../assets/img/lotdogs.png' width="80%" height="80%">
+            <p >Сите важни информации за вашите миленичиња на едно место. Добијте навремени известувања и бидете во тек со имунизацијата и прочистувањето на вашето куче или мачка. </p>
+
+        </div>
+
+    </mat-grid-tile>
+
+</mat-grid-list>
+<div style="text-align: center;color: antiquewhite; background: black; height: 50px!important; vertical-align: middle">
+    <p >PetSkp 2021</p>
+</div>

@@ -1,0 +1,65 @@
+<div class="content" *ngIf="auth.user$ | async as user">
+  <div *ngIf="vet != null">
+    <h3>Мој ветеринар</h3>
+    <h4 color="primary">
+      {{vet.name}}
+    </h4>
+    <hr>
+    <div>
+      <p><b> Контакт</b></p>
+      <p>
+        <a href="{{'tel:'+vet.formatted_phone_number}}">
+          <mat-icon>phone</mat-icon>{{vet.formatted_phone_number}}
+        </a>
+      </p>
+      <p><a href="{{vet.website}}">
+          <mat-icon>web</mat-icon>Веб страна
+        </a></p>
+      <p>
+        <mat-icon>house</mat-icon> {{vet.formatted_address}}
+      </p>
+      <mat-accordion>
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Работно време
+            </mat-panel-title>
+            <mat-panel-description>
+              {{vet.opening_hours.open_now ? 'Отворено' : 'Затворено'}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div *ngFor="let a of vet.opening_hours.weekday_text">
+            <p>{{a}} </p>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <hr>
+  </div>
+</div> 
+
+<div class="content">
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15">
+    <agm-marker *ngFor="let x of obs | async" [latitude]="x.geometry.location.lat" [longitude]="x.geometry.location.lng"
+      [markerDraggable]="false">
+    </agm-marker>
+  </agm-map>
+  <hr>
+  <mat-card-header>
+    <mat-form-field class="example-full-width">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </mat-card-header>
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let x of obs | async">
+      <card-component name="{{x.name}}" address="{{x.formatted_address.replace('Северна Македонија','')}}" detailsToken="{{x.place_id}}"
+        rating="{{x.rating}}" imgRef="{{x.photos? x.photos[0].photo_reference : null}}" showFavButton="showLikeBtn"></card-component>
+    </div>
+  </div>
+  <div style="text-align: center" class="content">
+    <button mat-raised-button color="accent" (click)="showMore()">Прикажи повеќе</button>
+
+  </div>
+
+</div>

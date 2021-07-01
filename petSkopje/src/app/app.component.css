@@ -1,0 +1,16 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-self: center;
+    align-items: center;
+    margin: 50%;
+  }
+  
+  .example-container > * {
+    width: 50%;
+  }
+
+  .content {
+    padding: 16px;
+}

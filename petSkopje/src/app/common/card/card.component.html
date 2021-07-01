@@ -1,0 +1,21 @@
+<mat-card class="mat-elevation-z4" style="height: 100%;">
+    <mat-card-header>
+      <mat-card-title>{{name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image>
+    <mat-card-content>
+      <img src = "{{photourl}}" width="200" height="100"/>
+      <p>
+        {{address}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+        <mat-chip-list>
+            <mat-chip color="primary" selected><mat-icon>grade</mat-icon>  {{rating}}  </mat-chip>
+            <button mat-raised-button color="accent" (click)="openDialog()">Детали</button>
+                <button mat-fab color="warn" *ngIf="showFavButton" (click)="setVet()">
+                  <mat-icon>favorite</mat-icon>
+                </button>
+          </mat-chip-list>
+    </mat-card-actions>
+  </mat-card>

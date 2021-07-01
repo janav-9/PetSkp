@@ -1,0 +1,39 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false" [ngClass]="{hidden:!(isHandset$ | async)}">
+        <mat-toolbar>Мени</mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item routerLink="vets">Ветеринари</a>
+            <a mat-list-item routerLink="shops">Пет шоп</a>
+            <span *ngIf="auth.user$ | async as user; else login">
+                    <a mat-list-item  routerLink="myPet"> <mat-icon>pets</mat-icon> {{user.name}}</a> 
+                    <a  mat-raised-button color="primary"  (click)="auth.signOut()">Одјави се</a>
+            </span>
+                <ng-template #login>
+                    <a mat-raised-button color="primary" (click)="auth.GoogleSignIn()">Најави се</a>
+                </ng-template>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="accent">
+            <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <a routerLink=""> <img src="../../../assets/img/vet.png" height="100" width="100">
+
+                PetSkp</a>
+            <span class="spacer"></span>
+            <div [ngClass]="{hidden:(isHandset$ | async)}">
+                <a mat-button routerLink="vets">Ветеринари</a>
+                <a mat-button routerLink="shops">Пет шоп</a>
+                <span *ngIf="auth.user$ | async as user; else login">
+                    <a routerLink="myPet"> <mat-icon>pets</mat-icon>{{user.name}}</a> 
+                    <a mat-raised-button color="primary" style="color:white!important" (click)="auth.signOut()">Одјави се</a>
+                </span>
+                <ng-template #login>
+                    <a mat-raised-button color="primary" style="color:white!important" (click)="auth.GoogleSignIn()">Најави се</a>
+                </ng-template>
+            </div>
+        </mat-toolbar>
+    </mat-sidenav-content>
+</mat-sidenav-container>

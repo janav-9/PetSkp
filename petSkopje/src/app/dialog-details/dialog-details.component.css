@@ -1,0 +1,5 @@
+agm-map { height: 200px; width: 700px }
+
+@media only screen and (max-width: 600px) {
+    agm-map { height: 200px; width: 400px }
+}

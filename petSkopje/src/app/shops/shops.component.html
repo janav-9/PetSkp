@@ -1,0 +1,44 @@
+<div class="content">
+
+    <h2> Препорачани производи </h2>
+
+    <div class="container-fluid yellow-bg">
+        <ngb-carousel >
+            <ng-template ngbSlide *ngFor="let prod of myArray">
+                <div class="picsum-img-wrapper">
+                    <img [src]="prod.img" class="picPet">
+                    <br>
+                    <h3>{{prod.name}}</h3>
+                    <p>{{prod.price ? prod.price + ' денари' : ''}}</p>
+                    <p>{{prod.petshop}}</p>
+                    <br>
+                </div>
+            </ng-template>
+        </ngb-carousel>
+
+    </div>
+    <div>
+        <br>
+        <br>
+        <h2> Пронајди пет шоп </h2>
+
+    </div>
+    <div>
+        <mat-card-header>
+            <mat-form-field class="example-full-width">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </mat-card-header>
+        <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <div fxFlex="25%" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let x of obs | async">
+                <card-component name="{{x.name}}" address="{{x.formatted_address.replace('Северна Македонија','')}}" detailsToken="{{x.place_id}}"
+                    openNow="{{x.opening_hours?.open_now}}" rating="{{x.rating}}" imgRef="{{x.photos? x.photos[0].photo_reference : null}}"></card-component>
+            </div>
+        </div>
+    </div>
+    <div style="text-align: center" class="content">
+            <button mat-raised-button color="accent" (click)="showMore()">Прикажи повеќе</button>
+        
+          </div>
+
+</div>

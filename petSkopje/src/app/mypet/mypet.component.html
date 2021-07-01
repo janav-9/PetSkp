@@ -1,0 +1,117 @@
+<div class="content">
+
+    <div *ngIf="auth.user$ | async as user">
+        <h3>Добредојдовте</h3>
+
+        <h3>{{ user.name }} {{ user.surname }}</h3>
+        <h4>{{ user.email }} </h4>
+
+        <br>
+        <button (click)="auth.signOut()" mat-raised-button color="accent">Одјави се</button>
+        <br>
+        <br>
+        <br> <br>
+
+
+        <mat-slide-toggle [(ngModel)]="user.notifPet">Известувања за миленик</mat-slide-toggle>
+        <br>
+
+        <br> <br>
+
+
+        <button mat-raised-button (click)="updateUser(user.notifPet, user.notifProd)">Зачувај промени</button>
+    </div>
+</div>
+<div class="content">
+    <button button="submit" mat-raised-button color="primary" (click)="openDialog()">
+        <mat-icon>add</mat-icon> Додај миленик
+    </button>
+    <br>
+    <mat-grid-list cols="{{cols}}" rowHeight="2:3" (window:resize)="onResize($event)" [gutterSize]="'20px'">
+        <mat-grid-tile class="mat-elevation-z8" *ngFor="let pet of myArray" colspan="1">
+            <div>
+                <div style="padding-left:5%; ">
+                    <h2>
+                        {{pet.Name}}<mat-icon>{{pet.Gender}} </mat-icon>
+                    </h2>
+                    <label>
+                        {{pet.Type}}
+                        <br>
+                        <mat-icon>cake</mat-icon>{{pet.Birthdate.toDate()| date:'dd/MM/yyyy'}}
+                        <span *ngIf="pet.Breed"> -{{pet.Breed}} </span>
+                        -- {{getAge(pet.Birthdate.toDate()) }} години
+                        <span *ngIf="pet.Weight">- {{pet.Weight}}kg</span>
+                    </label>
+                </div>
+
+                <div *ngIf="pet.Type == 'Куче' || pet.Type=='Мачка'">
+
+                    <hr>
+
+                    <div class="block">
+                        <img src="../../assets/img/vakcina.png">
+                        <br>
+                        <mat-label class="sm-font">Беснило</mat-label>
+                        <br>
+                        <div *ngIf="pet.Rabies">
+                            <br>
+                            <mat-label>{{pet.DateRabies?.toDate().setYear(pet.DateRabies.toDate().getFullYear() + 1)|
+                                date:'dd/MM/yyyy'}}</mat-label>
+                        </div>
+
+                    </div>
+                    <div class="block">
+                        <img src="../../assets/img/vakcina.png">
+                        <br>
+                        <mat-label class="sm-font">Останати вакцини</mat-label>
+                        <div *ngIf="pet.Parvo">
+                            <mat-label>{{pet.DateParvo?.toDate().setYear(pet.DateParvo.toDate().getFullYear() + 1)|
+                                date:'dd/MM/yyyy'}}</mat-label>
+                        </div>
+
+                    </div>
+                    <div class="block">
+                        <img src="../../assets/img/apce.png">
+                        <br>
+                        <mat-label class="sm-font">Внатрешни паразити</mat-label>
+                        <br>
+                        <mat-label>{{pet.ParasitesDate?.toDate().setMonth(pet.ParasitesDate.toDate().getMonth() + 3)|
+                            date:'dd/MM/yyyy'}}</mat-label>
+
+                    </div>
+                    <div class="block">
+                        <img src="../../assets/img/paraziti.png">
+                        <br>
+                        <mat-label class="sm-font">Надворешни паразити</mat-label>
+                        <br>
+
+                        <mat-label>{{pet.AmpuleDate?.toDate().setMonth(pet.AmpuleDate.toDate().getMonth() + 3)|
+                            date:'dd/MM/yyyy'}}</mat-label>
+                        <br>
+                    </div>
+                    <div class="block">
+                        <img src="../../assets/img/grooming.png">
+                        <br>
+                        <mat-label class="sm-font">Шишање/капење</mat-label>
+                        <br>
+                        <mat-label>{{pet.Groomer?.toDate().setMonth(pet.Groomer.toDate().getMonth() + 3)|
+                            date:'dd/MM/yyyy'}}</mat-label>
+                        <br>
+                    </div>
+                    <hr>
+
+                </div>
+
+                <div style="padding:5%">
+                    <button mat-raised-button color="accent" (click)="deletePet(pet.Uid)">
+                        <mat-icon>delete</mat-icon>
+                        Избриши миленик
+                    </button>
+                    <button mat-raised-button (click)="sendNotification()">Tест нотификација</button>
+
+                </div>
+
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

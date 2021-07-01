@@ -1,0 +1,70 @@
+<div [hidden]="loading==false"></div>
+<div *ngIf="loading==false" class="dialog">
+    <h1 color="primary">
+        {{place.name}}
+    </h1>
+    <mat-dialog-content>
+        <hr>
+        <div>
+            <p><b> Галерија</b></p>
+            <mat-grid-list cols="4">
+                <mat-grid-tile *ngIf="place.photos[0] != undefined"><img src="{{getimg(place.photos[0]?.photo_reference)}}"
+                        width="150" height="100" /></mat-grid-tile>
+                <mat-grid-tile *ngIf="place.photos[1] != undefined"><img src="{{getimg(place.photos[1]?.photo_reference)}}"
+                        width="150" height="100" /></mat-grid-tile>
+                <mat-grid-tile *ngIf="place.photos[2] != undefined"><img src="{{getimg(place.photos[2]?.photo_reference)}}"
+                        width="150" height="100" /></mat-grid-tile>
+                <mat-grid-tile *ngIf="place.photos[3] != undefined"><img src="{{getimg(place.photos[3]?.photo_reference)}}"
+                        width="150" height="100" /></mat-grid-tile>
+            </mat-grid-list>
+        </div>
+        <hr>
+
+        <div>
+            <p><b> Контакт</b></p>
+            <p>
+                <a href="{{'tel:'+place.formatted_phone_number}}">
+                    <mat-icon>phone</mat-icon>{{place.formatted_phone_number}}
+                </a>
+            </p>
+            <p><a href="{{place.website}}">
+                    <mat-icon>web</mat-icon>Веб страна
+                </a></p>
+            <p>
+                <mat-icon>house</mat-icon> {{place.formatted_address}}
+            </p>
+
+
+            <mat-accordion>
+
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            Работно време
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            {{place.opening_hours.open_now ? 'Отворено' : 'Затворено'}}
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <div *ngFor="let a of place.opening_hours.weekday_text">
+                        <p>{{a}} </p>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <hr>
+
+        <div>
+            <agm-map [latitude]="place.geometry.location.lat" [longitude]="place.geometry.location.lng" [zoom]="15">
+                <agm-marker [latitude]="place.geometry.location.lat" [longitude]="place.geometry.location.lng"
+                    [markerDraggable]="false">
+                </agm-marker>
+            </agm-map>
+        </div>
+        <hr>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close mat-stroked-button color="primary">Затвори</button>
+    </mat-dialog-actions>
+</div>

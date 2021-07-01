@@ -1,0 +1,78 @@
+<div class="content">
+    <h2>Внес на миленик </h2>
+    <hr>
+    <form #myForm="ngForm">
+        <mat-label>Тип на животно</mat-label>
+        <br>
+        <mat-radio-group [(ngModel)]="pet.Type" name="pet.Type" required>
+            <mat-radio-button value="Мачка">Мачка</mat-radio-button>
+            <mat-radio-button value="Куче">Куче</mat-radio-button>
+            <mat-radio-button value="Папагал">Папагал</mat-radio-button>
+            <mat-radio-button value="Морско прасе">Морско прасе</mat-radio-button>
+        </mat-radio-group>
+        <br>
+        <mat-label>Име</mat-label>
+        <mat-form-field appearance="outline">
+            <input matInput minlength="1" placeholder="Име" [(ngModel)]="pet.Name" name="pet.Name" required>
+        </mat-form-field>
+        <br>
+        <mat-label>Датум на раѓање</mat-label>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <input matInput [matDatepicker]="picker" [max]="maxDate"  [(ngModel)]="birthDate" name="birthDate" required>
+
+        <br>
+        <mat-label>Пол</mat-label>
+        <mat-radio-group [(ngModel)]="pet.Gender" name="pet.Gender" required>
+            <mat-radio-button value="male">Машко</mat-radio-button>
+            <mat-radio-button value="female">Женско</mat-radio-button>
+        </mat-radio-group>
+
+        <div *ngIf="pet.Type && (pet.Type == 'Мачка' || pet.Type == 'Куче')">
+            <mat-label>Раса</mat-label>
+            <mat-form-field appearance="outline">
+                <input matInput minlength="1" placeholder="Раса" [(ngModel)]="pet.breed" name="pet.breed">
+            </mat-form-field>
+            <br>
+
+            <mat-label>Вакцина против беснило</mat-label>
+            <mat-checkbox [(ngModel)]="pet.Rabies" name="pet.Rabies"></mat-checkbox>
+            <br>
+            <div *ngIf="pet.Rabies">
+
+                <mat-label>Датум на последна вакцина </mat-label>
+                <input matInput [matDatepicker]="picker" [min]="birthDate" [max]="maxDate" [(ngModel)]="rabiesDate" name="rabiesDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <br>
+            </div>
+            <mat-label>Вакцина против заразни паразитски болести</mat-label>
+            <mat-checkbox [(ngModel)]="pet.Parvo" name="pet.Parvo"></mat-checkbox>
+            <br>
+            <div *ngIf="pet.Parvo">
+                <mat-label>Датум на последна вакцина </mat-label>
+                <input matInput [matDatepicker]="picker" [min]="birthDate" [max]="maxDate"  [(ngModel)]="parvoDate" name="parvoDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <br>
+            </div>
+            <mat-label>Датум на последно внатрешно прочистување </mat-label>
+            <input matInput [matDatepicker]="picker" [min]="birthDate" [max]="maxDate" [(ngModel)]="parasitesDate" name="parasitesDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <br>
+            <mat-label>Датум на ампула </mat-label>
+            <input matInput [matDatepicker]="picker1" [min]="birthDate" [max]="maxDate" [(ngModel)]="ampuleDate" name="ampuleDate">
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+            <br>
+            <mat-label>Датум на последно капење/шишање </mat-label>
+            <input matInput [matDatepicker]="picker2" [min]="birthDate" [max]="maxDate" [(ngModel)]="groomerDate" name="groomerDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+            <br>
+        </div>
+        <br>
+    </form>
+    <button mat-raised-button color="primary" type="submit" (click)="savePet()" [disabled]="!myForm.valid" [mat-dialog-close]="myForm.valid">Зачувај</button>
+</div>

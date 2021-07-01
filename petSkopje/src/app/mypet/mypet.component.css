@@ -1,0 +1,43 @@
+
+  .content {
+    padding: 5%;
+    width: 50%;
+    display: inline-grid;
+    text-align: center
+}
+
+mat-grid-list{
+  margin-top:5%
+}
+
+@media only screen and (max-width: 800px) {
+  mat-grid-list{
+    width: 100%;
+  }
+  .content {
+    padding: 5%;
+    width: 100%;
+
+    text-align: center
+}
+
+}
+
+img {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+}
+
+
+.block{
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  width: 120px;
+  padding: 6px;
+}
+
+.sm-font{
+  font-size: x-small
+}

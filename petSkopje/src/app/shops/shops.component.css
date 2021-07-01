@@ -1,0 +1,20 @@
+.content {
+    padding: 5%;
+}
+
+.carousel-caption{
+    color: black!important
+}
+
+.yellow-bg{
+    background-color: #d6d09a
+}
+
+.picsum-img-wrapper{
+    text-align: center
+}
+.picPet{
+    max-width: 30%;
+    max-height: 30%;
+    padding: 2%
+}
